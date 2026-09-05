@@ -22,7 +22,7 @@ class_name = "PlayerSession"
 
 [[migrations]]
 tag = "v1"
-new_classes = ["PlayerSession"]
+new_sqlite_classes = ["PlayerSession"]
 
 # ------------------------------------------------------------
 # Global IP-based rate limit on write endpoints. Free, built
