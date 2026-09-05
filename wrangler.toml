@@ -8,7 +8,7 @@ compatibility_date = "2026-01-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "nietzschecraft"
-database_id = "YOUR_D1_DATABASE_ID"
+database_id = "e6b8c7c2-f05a-467f-ae7b-57119bf3ca3a"
 
 # ------------------------------------------------------------
 # Durable Object — one instance per player id, holding
