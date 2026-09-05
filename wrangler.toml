@@ -1,0 +1,44 @@
+name = "nietzschecraft-api"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# ------------------------------------------------------------
+# D1 — durable world/block/player storage
+# ------------------------------------------------------------
+[[d1_databases]]
+binding = "DB"
+database_name = "nietzschecraft"
+database_id = "YOUR_D1_DATABASE_ID"
+
+# ------------------------------------------------------------
+# Durable Object — one instance per player id, holding
+# short-lived write-rate counters plus last known position for
+# reach/teleport checks. It performs the actual D1 writes for
+# /changes and /player once those checks pass.
+# ------------------------------------------------------------
+[[durable_objects.bindings]]
+name = "PLAYER_SESSION"
+class_name = "PlayerSession"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["PlayerSession"]
+
+# ------------------------------------------------------------
+# Global IP-based rate limit on write endpoints. Free, built
+# into Workers, no external service. Period must be 10 or 60.
+# ------------------------------------------------------------
+[[ratelimits]]
+name = "GLOBAL_LIMITER"
+namespace_id = "1001"
+
+[ratelimits.simple]
+limit = 20
+period = 10
+
+# ------------------------------------------------------------
+# Secret — set with:
+#   wrangler secret put API_KEY
+# then put the same value in game.js where it says
+# REPLACE_WITH_YOUR_API_KEY. Never commit it here.
+# ------------------------------------------------------------
